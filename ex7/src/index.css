@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fff;
+}
+
+.custom-colored-card {
+  border-radius: 6px;
+}
+
+.card-blue {
+  background-color: #2b7fff !important;
+}
+
+.card-yellow {
+  background-color: #f6c23e !important;
+}
+
+.card-red {
+  background-color: #cc444b !important;
+}
+
+.card-image-box {
+  border-radius: 4px;
+  height: 240px;
+  background-color: #ffffff !important;
+}
+
+.car-crop-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.car-cropped-img {
+  width: 315%;
+  height: auto;
+  position: absolute;
+  top: -62%;
+  left: -4%;
+  object-fit: contain;
+}
+
+.card-text-custom {
+  color: #111111;
+  font-size: 1rem;
+  font-weight: 400;
+}

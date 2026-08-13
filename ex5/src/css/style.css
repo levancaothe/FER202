@@ -1,0 +1,428 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+.exercise-menu {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+
+.exercise-page {
+  min-height: calc(100vh - 56px);
+  background: #fff;
+}
+
+.gray-header {
+  background: #e9ecef;
+  min-height: 230px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 3rem;
+}
+
+.gray-header h1 {
+  margin: 0;
+
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.centered-header {
+  justify-content: center;
+}
+
+.grid-box {
+  height: 112px;
+
+  background: #d3d3d3;
+
+  border: 2px solid #888;
+
+  padding: 10px 24px;
+
+  font-size: 1.1rem;
+}
+
+.exercise-page main {
+  max-width: 1100px;
+}
+
+.exercise-footer {
+  background: #d9cdcf;
+
+  text-align: center;
+
+  font-size: 3rem;
+  font-weight: 700;
+
+  padding: 8px;
+}
+
+.exercise-nav .nav-link {
+  font-size: 1.1rem;
+
+  padding-right: 1.8rem;
+}
+
+/* =========================
+   EXERCISE 2
+========================= */
+
+.tech-logo {
+  width: 100%;
+
+  max-width: 440px;
+
+  height: 330px;
+
+  object-fit: contain;
+}
+
+/* =========================
+   EXERCISE 4
+========================= */
+
+.fpt-page {
+  min-height: calc(100vh - 56px);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.fpt-header {
+  background: #f39427;
+
+  text-align: center;
+
+  padding-top: 20px;
+}
+
+.fpt-logo-image {
+  width: min(55%, 760px);
+
+  max-height: 430px;
+
+  object-fit: contain;
+
+  background: #fff;
+}
+
+.fpt-nav {
+  padding: 8px;
+}
+
+.fpt-nav a {
+  color: white;
+
+  font-size: 1.25rem;
+
+  margin: 0 7px;
+}
+
+.fpt-content {
+  flex: 1;
+
+  text-align: center;
+
+  padding: 55px 20px;
+}
+
+.fpt-content section {
+  margin-bottom: 30px;
+}
+
+.fpt-content h2 {
+  font-weight: 700;
+}
+
+.fpt-content p {
+  font-size: 1.25rem;
+}
+
+.fpt-footer {
+  background: #f8d080;
+
+  color: white;
+
+  text-align: center;
+
+  padding: 38px 10px;
+
+  font-size: 1.4rem;
+}
+
+/* =========================
+   EXERCISE 5
+========================= */
+
+.students-page {
+  background: #fff;
+
+  min-height: calc(100vh - 56px);
+}
+
+.students-header {
+  background: #f99a2e;
+
+  padding-bottom: 52px;
+}
+
+.students-header-inner {
+  min-height: 100px;
+
+  background: #f1d5b0;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 8px 8%;
+
+  gap: 25px;
+}
+
+.brand-block {
+  width: 115px;
+
+  flex-shrink: 0;
+}
+
+.brand-block img {
+  width: 95px;
+
+  height: 75px;
+
+  object-fit: contain;
+}
+
+.students-nav {
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+  flex: 1;
+}
+
+.students-nav a {
+  color: #ef7435;
+
+  font-size: 1rem;
+}
+
+.search-box {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.search-box input {
+  width: 180px;
+
+  height: 28px;
+}
+
+.banner-wrap {
+  padding: 54px 3%;
+}
+
+.students-banner {
+  display: block;
+
+  width: min(92%, 1200px);
+
+  height: auto;
+
+  max-height: 650px;
+
+  object-fit: cover;
+
+  margin: auto;
+}
+
+.students-content {
+  padding-bottom: 45px;
+}
+
+.students-breadcrumb {
+  background: #e9ecef;
+
+  display: inline-flex;
+
+  padding: 10px 16px;
+
+  margin-top: 0;
+}
+
+.students-breadcrumb a {
+  color: #ef7435;
+}
+
+.students-title {
+  text-align: center;
+
+  font-size: 2rem;
+
+  margin: 50px 0 8px;
+}
+
+.students-grid {
+  max-width: 950px;
+
+  margin: auto;
+}
+
+.student-card {
+  border-radius: 0;
+
+  margin: 0;
+}
+
+.student-image {
+  width: 100%;
+
+  height: 360px;
+
+  object-fit: cover;
+}
+
+.student-id {
+  margin: 14px 0 8px;
+}
+
+.student-info {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 0 16px;
+}
+
+.attendance-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 4px 70px 15px;
+}
+
+.attendance-row label {
+  display: flex;
+
+  gap: 5px;
+
+  align-items: center;
+}
+
+.submit-btn {
+  padding: 4px 12px;
+
+  margin-bottom: 5px;
+}
+
+.students-footer {
+  background: #f07c3a;
+
+  padding: 22px 0 10px;
+}
+
+.footer-inner {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.footer-inner h3 {
+  font-size: 1.25rem;
+}
+
+.footer-inner p {
+  margin: 2px 0;
+
+  font-size: 0.9rem;
+}
+
+.social-icons {
+  font-size: 1.7rem;
+
+  font-weight: 700;
+}
+
+.copyright {
+  text-align: center;
+
+  margin-top: 15px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .gray-header h1 {
+    font-size: 2rem;
+  }
+
+  .gray-header {
+    min-height: 170px;
+
+    padding: 0 1.5rem;
+  }
+
+  .exercise-footer {
+    font-size: 2rem;
+  }
+
+  .students-header-inner {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-box input {
+    flex: 1;
+  }
+
+  .student-image {
+    height: auto;
+  }
+
+  .attendance-row {
+    padding-left: 25px;
+
+    padding-right: 25px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+}
