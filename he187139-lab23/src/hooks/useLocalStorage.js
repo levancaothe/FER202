@@ -1,23 +1,25 @@
 import { useState, useEffect } from "react";
-import { initialClasses } from "../data/Classes";
 
 function useLocalStorage(key, initialValue) {
-  const [storeValue, setStoreValue] = useState(() => {
+  const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialClasses;
+      return item !== null ? JSON.parse(item) : initialValue;
     } catch (error) {
-      return initialClasses;
+      console.error(`Error reading localStorage key "${key}":`, error);
+      return initialValue;
     }
   });
 
   useEffect(() => {
     try {
-        window.localStorage.setItem(key, JSON.stringify())
+      window.localStorage.setItem(key, JSON.stringify(storedValue));
     } catch (error) {
-        
+      console.error(`Error setting localStorage key "${key}":`, error);
     }
-  })
+  }, [key, storedValue]);
+
+  return [storedValue, setStoredValue];
 }
 
-export default useLocalStorage
+export default useLocalStorage;

@@ -1,19 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useReducer, useMemo, useEffect } from "react";
 import { Col, FormGroup, FormSelect, Row } from "react-bootstrap";
 import { initialAttendances } from "../data";
 
+const attendanceReducer = (state, action) => {
+  switch (action.type) {
+    case "TOGGLE_STATUS":
+      return state.map((item) =>
+        item.id === action.payload
+          ? {
+              ...item,
+              status: item.status === "PRESENT" ? "ABSENT" : "PRESENT",
+            }
+          : item
+      );
+    case "DELETE_ATTENDANCE":
+      return state.filter((item) => item.id !== action.payload);
+    case "RESET":
+      return initialAttendances;
+    default:
+      return state;
+  }
+};
+
 function ClassList() {
+  const [attendances, dispatch] = useReducer(
+    attendanceReducer,
+    initialAttendances,
+    (initial) => {
+      try {
+        const item = window.localStorage.getItem("attendances");
+        return item ? JSON.parse(item) : initial;
+      } catch (error) {
+        return initial;
+      }
+    }
+  );
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem("attendances", JSON.stringify(attendances));
+    } catch (error) {
+      console.error("Error saving attendances to localStorage:", error);
+    }
+  }, [attendances]);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
-  const [bstatus, setBStatus] = useState("PRESENT");
 
-  const st = Array.from(new Set(initialAttendances.map((c) => c.status)));
+  const st = useMemo(() => {
+    return Array.from(new Set(attendances.map((c) => c.status)));
+  }, [attendances]);
 
-  const filtered = initialAttendances.filter(
-    (p) =>
-      (status === "" || p.status === status) &&
-      p.name.toLowerCase().includes(search.toLowerCase()),
-  );
+  const filtered = useMemo(() => {
+    return attendances.filter(
+      (p) =>
+        (status === "" || p.status === status) &&
+        p.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [attendances, status, search]);
+
+  const presentCount = useMemo(() => {
+    return filtered.filter((item) => item.status === "PRESENT").length;
+  }, [filtered]);
+
+  const absentCount = useMemo(() => {
+    return filtered.filter((item) => item.status === "ABSENT").length;
+  }, [filtered]);
+
+  const attendanceRate = useMemo(() => {
+    if (filtered.length === 0) return 0;
+    return Number(((presentCount / filtered.length) * 100).toFixed(2));
+  }, [presentCount, filtered.length]);
 
   function formatDateToDDMMYYYY(dateStr) {
     if (!dateStr) return "N/A";
@@ -28,6 +84,11 @@ function ClassList() {
     return `${day}/${month}/${year}`;
   }
 
+  const handleResetFilter = () => {
+    setSearch("");
+    setStatus("");
+  };
+
   return (
     <div className="mx-2">
       <Row>
@@ -37,7 +98,7 @@ function ClassList() {
         <Col md={6} className="text-end">
           <button
             className="btn btn-primary mb-3"
-            //   onClick={() => navigate("/classes")}
+            // onClick={() => navigate("/classes")}
           >
             Change Theme
           </button>
@@ -83,23 +144,17 @@ function ClassList() {
         </div>
         <button
           className="btn btn-danger mb-3"
-          //   onClick={() => navigate("/classes")}
+          onClick={handleResetFilter}
         >
           Reset Bộ Lọc
         </button>
       </div>
 
       <p>
-        Tổng số bản ghi: <strong>{filtered.length}</strong>
-        Có mặt:<strong>
-          {initialAttendances.status === "PRESENT".length}
-        </strong>{" "}
-        Vắng mặt:{" "}
-        <strong>{initialAttendances.status === "ABSENT".length}</strong> Tỷ lệ
-        đi học:{" "}
-        <strong>
-          {(initialAttendances.status === "PRESENT".length) / filtered.length}
-        </strong>
+        Tổng số bản ghi: <strong>{filtered.length}</strong> Có mặt:
+        <strong>{presentCount}</strong> Vắng mặt:{" "}
+        <strong>{absentCount}</strong> Tỷ lệ đi học:{" "}
+        <strong>{attendanceRate}%</strong>
       </p>
 
       <table className="table table-striped border">
@@ -123,7 +178,9 @@ function ClassList() {
               <td>
                 <button
                   className="btn btn-primary mb-3"
-                  // onClick={() => setBStatus}
+                  onClick={() =>
+                    dispatch({ type: "TOGGLE_STATUS", payload: init.id })
+                  }
                   style={{
                     backgroundColor: init.status === "PRESENT" ? "blue" : "red",
                   }}
@@ -134,7 +191,9 @@ function ClassList() {
               <td>
                 <button
                   className="btn btn-danger mb-3"
-                  //   onClick={() => navigate("/classes")}
+                  onClick={() =>
+                    dispatch({ type: "DELETE_ATTENDANCE", payload: init.id })
+                  }
                 >
                   Xóa
                 </button>
