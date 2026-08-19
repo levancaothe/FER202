@@ -41,7 +41,7 @@ function CourseDetail() {
       <div className="d-flex mb-3">
         <button
           className="btn btn-success btn-sm me-2"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/courses")}
         >
           ← Back
         </button>

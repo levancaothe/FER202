@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Col, FormGroup, FormSelect, Row } from "react-bootstrap";
+import { Button, Card, Col, FormGroup, FormSelect, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Course() {
@@ -11,6 +11,14 @@ function Course() {
   const result = [...new Set(course.map((item) => item.semester))];
   const handleFilter = (e) => {
     setCourse(e.target.value);
+  };
+
+  const handleRefresh = () => {
+    setSearch("");
+    setSemester("");
+    axios
+      .get(" http://localhost:9000/courses")
+      .then((res) => setCourse(res.data));
   };
 
   const filtered = course.filter(
@@ -40,7 +48,7 @@ function Course() {
           <div className="container-fluid">
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div className="navbar-nav">
-                <a className="nav-link active" aria-current="page" href="#">
+                <a className="nav-link active" aria-current="page" href="/">
                   Courses
                 </a>
                 <a className="nav-link" href="#">
@@ -79,20 +87,25 @@ function Course() {
           }}
         >
           <p>Semester</p>
-          <FormGroup
-            style={{
-              width: "40%",
-            }}
-          >
-            <FormSelect value={course} onChange={handleFilter}>
-              {/* <option value=""></option> */}
-              {result.map((b) => (
-                <option key={b.id} value={b.id}>
-                  {b}
-                </option>
-              ))}
-            </FormSelect>
-          </FormGroup>
+          <div className="d-flex align-items-center gap-2">
+            <FormGroup
+              style={{
+                width: "40%",
+              }}
+            >
+              <FormSelect value={course} onChange={handleFilter}>
+                {/* <option value=""></option> */}
+                {result.map((b) => (
+                  <option key={b.id} value={b.id}>
+                    {b}
+                  </option>
+                ))}
+              </FormSelect>
+            </FormGroup>
+            <Button variant="outline-secondary" onClick={handleRefresh}>
+              Refresh
+            </Button>
+          </div>
         </Col>
       </Row>
       <Row>
