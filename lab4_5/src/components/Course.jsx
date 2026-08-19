@@ -16,9 +16,6 @@ function Course() {
   const handleRefresh = () => {
     setSearch("");
     setSemester("");
-    axios
-      .get(" http://localhost:9000/courses")
-      .then((res) => setCourse(res.data));
   };
 
   const filtered = course.filter(
@@ -48,7 +45,11 @@ function Course() {
           <div className="container-fluid">
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div className="navbar-nav">
-                <a className="nav-link active" aria-current="page" href="/">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="/courses"
+                >
                   Courses
                 </a>
                 <a className="nav-link" href="#">
