@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Course from "./components/Course";
 import CourseDetail from "./components/CourseDetail";
 
@@ -16,6 +16,9 @@ function App() {
         <Routes>
           <Route path="/courses" element={<Course />} />
           <Route path="/detail/:id" element={<CourseDetail />} />
+
+          {/* auto điều hướng đến /classes (thay thế router mặc định = /classes)*/}
+        <Route path="/" element={<Navigate to="/courses" replace />} />
         </Routes>
       </div>
     </div>
